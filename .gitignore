@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 .env
 .ec2frontend.pem
-.smoke-test.sh
+# .smoke-test.sh
