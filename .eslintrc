@@ -1,0 +1,25 @@
+{
+	"env": {
+		"es2021": true,
+		"browser": true,
+		"commonjs": true
+	},
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"rules": {
+		"no-unused-vars": "warn",
+		"react/prop-types": 0,
+		"no-control-regex": 0
+	}
+}

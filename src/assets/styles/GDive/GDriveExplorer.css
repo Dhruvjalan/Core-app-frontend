@@ -1,0 +1,106 @@
+/* pages/GDriveExplorer.css */
+.gdrive-explorer {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.gdrive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.gdrive-header h1 {
+  color: #1a1a1a;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.login-btn, .logout-btn {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover, .logout-btn:hover {
+  background-color: #3367d6;
+}
+
+.welcome-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.welcome-card {
+  background: #f8f9fa;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  max-width: 400px;
+}
+
+.welcome-card h2 {
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.welcome-card p {
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.connect-btn {
+  background-color: #34a853;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.connect-btn:hover {
+  background-color: #2e8b47;
+}
+
+.error-message {
+  background-color: #fce8e6;
+  color: #c5221f;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6c4;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+.gdrive-content {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}

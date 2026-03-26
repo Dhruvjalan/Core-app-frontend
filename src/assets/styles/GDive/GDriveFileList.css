@@ -1,0 +1,87 @@
+/* components/GDrive/GDriveFileList.css */
+.gdrive-file-list {
+  background: white;
+}
+
+.file-list-header {
+  display: grid;
+  grid-template-columns: 1fr 150px 100px;
+  gap: 20px;
+  padding: 12px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+.file-list {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.file-item {
+  display: grid;
+  grid-template-columns: 1fr 150px 100px;
+  gap: 20px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-items: center;
+}
+
+.file-item:hover {
+  background-color: #f8f9fa;
+}
+
+.file-icon-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.file-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.file-name {
+  color: #1a1a1a;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-modified, .file-size {
+  color: #666;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.empty-folder {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Scrollbar styling */
+.file-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.file-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.file-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.file-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

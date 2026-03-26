@@ -1,0 +1,155 @@
+/* Dashboard.css */
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --focus-ring: rgba(37, 99, 235, 0.2);
+}
+
+.dashboard-wrapper {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.dashboard-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+/* Form Layout */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Labels and Inputs */
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Checkbox styling */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+/* Dashboard.css Additions */
+.mb-8 { margin-bottom: 2rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.text-muted { color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem; display: block; }
+.error-message { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 6px; text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-card {
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.result-row {
+  display: flex;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.result-key {
+  font-weight: 600;
+  width: 150px;
+  flex-shrink: 0;
+  color: var(--text-main);
+  text-transform: capitalize;
+}
+
+.result-value {
+  color: var(--text-muted);
+  word-break: break-word;
+}
