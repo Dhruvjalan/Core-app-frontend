@@ -29,10 +29,7 @@ jobs:
             VITE_PRODUCTION: ${{ secrets.VITE_PRODUCTION }}
         run: npm run build
 
-      - name: Run Backend Smoke Test
-        run: |
-          chmod +x smoke-test.sh
-          ./smoke-test.sh
+
 
       - name: Deploy to EC2
         uses: appleboy/scp-action@master
@@ -45,8 +42,17 @@ jobs:
           strip_components: 1
           rm: true
 
-      - name: Fix Permissions & Health Check
+      - name: Fix Permissions on EC2
+        uses: appleboy/ssh-action@master  # <--- CRITICAL: Run this ON the EC2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo chown -R ubuntu:www-data /var/www/html/core-frontend
+            sudo chmod -R 755 /var/www/html/core-frontend
+
+      - name: Run Backend Smoke Test
         run: |
-          # Give Nginx access to READ, but let UBUNTU keep ownership so we can delete next time
-          sudo chmod -R 755 /var/www/html/core-frontend
-          sudo chown -R ubuntu:www-data /var/www/html/core-frontend
+          chmod +x smoke-test.sh
+          ./smoke-test.sh
