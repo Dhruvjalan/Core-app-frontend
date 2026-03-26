@@ -29,7 +29,18 @@ jobs:
             VITE_PRODUCTION: ${{ secrets.VITE_PRODUCTION }}
         run: npm run build
 
-
+      # NEW STEP: Prep the EC2 folder by running your refresh commands
+      - name: Prepare Target Directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo rm -rf /var/www/html/core-frontend
+            sudo mkdir -p /var/www/html/core-frontend
+            sudo chown ubuntu:ubuntu /var/www/html/core-frontend
+            sudo chmod 755 /var/www/html/core-frontend
 
       - name: Deploy to EC2
         uses: appleboy/scp-action@master
@@ -41,15 +52,17 @@ jobs:
           target: "/var/www/html/core-frontend"
           strip_components: 1
 
-      - name: Fix Permissions & Health Check
+      - name: Finalize Permissions & Health Check
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            # Set to www-data for Nginx, but keep 755 so ubuntu can still enter
             sudo chown -R www-data:www-data /var/www/html/core-frontend
-            # Basic check: verify index.html exists
+            sudo chmod -R 755 /var/www/html/core-frontend
+            
             if [ -f "/var/www/html/core-frontend/index.html" ]; then
               echo "Deployment successful: index.html is in place."
             else
