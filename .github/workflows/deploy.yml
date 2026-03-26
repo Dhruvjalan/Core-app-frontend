@@ -46,17 +46,7 @@ jobs:
           rm: true
 
       - name: Fix Permissions & Health Check
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            sudo chown -R www-data:www-data /var/www/html/core-frontend
-            # Basic check: verify index.html exists
-            if [ -f "/var/www/html/core-frontend/index.html" ]; then
-              echo "Deployment successful: index.html is in place."
-            else
-              echo "Deployment failed: index.html not found."
-              exit 1
-            fi
+        run: |
+          # Give Nginx access to READ, but let UBUNTU keep ownership so we can delete next time
+          sudo chmod -R 755 /var/www/html/core-frontend
+          sudo chown -R ubuntu:www-data /var/www/html/core-frontend
