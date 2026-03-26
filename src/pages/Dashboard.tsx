@@ -104,7 +104,7 @@ export default function Dashboard() {
   const handleDBChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedDB(e.target.value);
     setFormData({});
-    setResults([]); // Clear results when swapping databases
+    setResults([]); 
     setError('');
   };
 
