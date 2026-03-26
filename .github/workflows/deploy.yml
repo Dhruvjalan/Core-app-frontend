@@ -1,0 +1,52 @@
+name: Deploy Core Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "dist/*"
+          target: "/var/www/html/core-frontend"
+          strip_components: 1
+
+      - name: Fix Permissions & Health Check
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo chown -R www-data:www-data /var/www/html/core-frontend
+            # Basic check: verify index.html exists
+            if [ -f "/var/www/html/core-frontend/index.html" ]; then
+              echo "Deployment successful: index.html is in place."
+            else
+              echo "Deployment failed: index.html not found."
+              exit 1
+            fi
