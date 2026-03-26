@@ -88,8 +88,8 @@ export default function Dashboard() {
     try {
       // Replace with your actual EC2 backend IP and Port
       const response = await axios.post(`${API_BASE}/api/records/search`, {
-        dbName: selectedDB,
-        filters: formData
+        "dbName": selectedDB,
+        "filters": formData
       });
       
       setResults(response.data);
