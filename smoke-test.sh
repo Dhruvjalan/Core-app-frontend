@@ -17,7 +17,7 @@ EXISTS=$(echo "$USER_CHECK" | jq '.exists')
 if [ "$EXISTS" = "true" ]; then
   echo "User check passed."
 else
-  echo "User check failed! Response: $USER_CHECK"
+  echo "User check failed!! Response: $USER_CHECK"
   exit 1
 fi
 
