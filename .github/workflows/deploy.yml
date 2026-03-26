@@ -40,6 +40,7 @@ jobs:
           source: "dist/*"
           target: "/var/www/html/core-frontend"
           strip_components: 1
+          rm: true
 
       - name: Fix Permissions & Health Check
         uses: appleboy/ssh-action@master
