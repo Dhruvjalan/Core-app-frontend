@@ -58,6 +58,9 @@ jobs:
             fi
 
       - name: Run Backend Smoke Test
+        env: 
+            VITE_PROD_BACKEND_URL: ${{ secrets.VITE_PROD_BACKEND_URL }}
+            TEST_ROLL_NO: ${{ secrets.TEST_ROLL_NO }}
         run: |
           chmod +x smoke-test.sh
           ./smoke-test.sh
