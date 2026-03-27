@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+      
+      - name: Set lowercase repository owner
+        run: |
+          echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
 
       # We tag the latest merged code as 'production' so EC2 knows what to run
       - name: Log in to GHCR and Retag Image
@@ -22,10 +26,10 @@ jobs:
           
           # Pull the image that was built during the PR (using the commit SHA)
           # Note: In a highly advanced setup, you'd pull the PR tag, but for simplicity on push:
-          docker build -t ghcr.io/${{ github.repository_owner }}/core-frontend:production \
+          docker build -t ghcr.io/$REPO_OWNER/core-frontend:production \
             --build-arg VITE_PROD_BACKEND_URL=${{ secrets.VITE_PROD_BACKEND_URL }} .
           
-          docker push ghcr.io/${{ github.repository_owner }}/core-frontend:production
+          docker push ghcr.io/$REPO_OWNER/core-frontend:production
 
       - name: Deploy Docker Container to EC2
         uses: appleboy/ssh-action@master

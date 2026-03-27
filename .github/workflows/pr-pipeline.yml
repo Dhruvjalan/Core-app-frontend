@@ -35,6 +35,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Set lowercase repository owner
+        run: |
+          echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
 
       - name: Build and Push Docker Image (Tagged with PR Number)
         uses: docker/build-push-action@v5
@@ -45,5 +49,4 @@ jobs:
           build-args: |
             VITE_PROD_BACKEND_URL=${{ secrets.VITE_PROD_BACKEND_URL }}
           # Tags the image with your repo name and the PR number (e.g., core-frontend:pr-12)
-          tags: ghcr.io/${{ github.repository_owner }}/core-frontend:pr-${{ github.event.pull_request.number }}
-          
+          tags: ghcr.io/${{ env.REPO_OWNER }}/core-frontend:pr-${{ github.event.pull_request.number }}
