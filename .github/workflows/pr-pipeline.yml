@@ -1,0 +1,49 @@
+name: 1. PR Checks & Build Staging Image
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Required to push Docker image to GitHub
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      # Insert your automated tests here (Unit tests, Linting, etc.)
+      # - name: Run Tests
+      #   run: npm run test
+
+      - name: Log in to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker Image (Tagged with PR Number)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Passes your GitHub secrets securely into the Vite build step
+          build-args: |
+            VITE_PROD_BACKEND_URL=${{ secrets.VITE_PROD_BACKEND_URL }}
+          # Tags the image with your repo name and the PR number (e.g., core-frontend:pr-12)
+          tags: ghcr.io/${{ github.repository_owner }}/core-frontend:pr-${{ github.event.pull_request.number }}
+          
