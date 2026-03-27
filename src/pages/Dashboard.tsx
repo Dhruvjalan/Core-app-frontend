@@ -16,14 +16,14 @@ console.log("In Dashboard - API BASE URL:", API_BASE, "PROD: ", import.meta.env.
 
 
 const dbSchemas: Record<string, SchemaField[]> = {
-  'e21-students': [
-    { name: 'name', label: 'Name', type: 'text' },
-    { name: 'class', label: 'Class', type: 'number' },
-    { name: 'phone', label: 'Phone', type: 'number' },
-    { name: 'formattedID', label: 'Formatted ID', type: 'text' },
-    { name: 'school', label: 'School', type: 'text' },
-    { name: 'email', label: 'Email', type: 'email' },
-  ],
+  // 'e21-students': [
+  //   { name: 'name', label: 'Name', type: 'text' },
+  //   { name: 'class', label: 'Class', type: 'number' },
+  //   { name: 'phone', label: 'Phone', type: 'number' },
+  //   { name: 'formattedID', label: 'Formatted ID', type: 'text' },
+  //   { name: 'school', label: 'School', type: 'text' },
+  //   { name: 'email', label: 'Email', type: 'email' },
+  // ],
   'e21-teams': [
     { name: 'teamName', label: 'Team Name', type: 'text' },
     { name: 'email', label: 'Team Email', type: 'email' },
